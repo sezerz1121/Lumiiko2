@@ -75,21 +75,17 @@ function App() {
       );
       gsap.utils.toArray(".metric strong").forEach((el) => {
         const value = el.dataset.value;
-        gsap.fromTo(
-          el,
-          { textContent: 0 },
-          {
-            textContent: value,
-            duration: 1.4,
-            snap: { textContent: 1 },
-            ease: "power2.out",
-            scrollTrigger: { trigger: el, start: "top 85%", once: true },
-            onUpdate() {
-              if (value === "99")
-                el.textContent = Math.round(el.textContent) + "%";
-            },
+        const suffix = el.dataset.suffix || "";
+        const counter = { value: 0 };
+        gsap.to(counter, {
+          value: Number(value),
+          duration: 1.4,
+          ease: "power2.out",
+          scrollTrigger: { trigger: el, start: "top 85%", once: true },
+          onUpdate() {
+            el.textContent = `${Math.round(counter.value)}${suffix}`;
           },
-        );
+        });
       });
       gsap.to(".orb-one", {
         y: -25,
@@ -438,19 +434,19 @@ function App() {
       <section className="proof">
         <div className="section metrics">
           <div className="metric reveal">
-            <strong data-value="150">150+</strong>
+            <strong data-value="7" data-suffix="">7</strong>
             <span>projects launched</span>
           </div>
           <div className="metric reveal">
-            <strong data-value="99">99%</strong>
+            <strong data-value="99" data-suffix="%">99%</strong>
             <span>mobile friendly</span>
           </div>
           <div className="metric reveal">
-            <strong data-value="2">2s</strong>
+            <strong data-value="2" data-suffix="s">2s</strong>
             <span>target load time</span>
           </div>
           <div className="metric reveal">
-            <strong data-value="100">100%</strong>
+            <strong data-value="100" data-suffix="%">100%</strong>
             <span>made for you</span>
           </div>
         </div>
@@ -486,7 +482,7 @@ function App() {
             [
               "04",
               "Launch",
-              "We put it out into the world—and keep making sure it does its job.",
+              "We launch your site, then keep it running exactly as it should.",
             ],
           ].map((s) => (
             <article className="step reveal" key={s[0]}>
@@ -533,7 +529,7 @@ function App() {
           </button>
         </form>
         <p className="form-status" aria-live="polite">
-          {formStatus === "success" && "Thanks—your request is on its way."}
+          {formStatus === "success" && "Thanks, your request is on its way."}
           {formStatus === "error" && "We couldn’t send that just now. Please email studio@lumiiko.in."}
         </p>
         <div className="cta-contacts">
