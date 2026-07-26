@@ -40,7 +40,8 @@ function App() {
 
     try {
       await axios.post(
-        import.meta.env.VITE_CONTACT_ENDPOINT || "/users/sendEmail",
+        import.meta.env.VITE_CONTACT_ENDPOINT ||
+          "https://lumiiko-be.vercel.app/users/sendEmail",
         details,
       );
       form.reset();
