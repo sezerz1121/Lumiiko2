@@ -40,7 +40,7 @@ function App() {
 
     try {
       await axios.post(
-        import.meta.env.VITE_CONTACT_ENDPOINT,
+        import.meta.env.VITE_CONTACT_ENDPOINT || "/users/sendEmail",
         details,
       );
       form.reset();
