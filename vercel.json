@@ -1,5 +1,9 @@
 {
-    "rewrites": [
-  {"source": "/(.*)", "destination": "/"}
+  "rewrites": [
+    {
+      "source": "/users/(.*)",
+      "destination": "https://lumiiko-be.vercel.app/users/$1"
+    },
+    { "source": "/(.*)", "destination": "/" }
   ]
 }
