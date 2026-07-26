@@ -340,7 +340,9 @@ function App() {
             "Care & maintenance",
           ].map((item, i) => (
             <article className="service-card reveal" key={item}>
-              <div className="icon">{["✦", "◌", "⌁", "↗", "ϟ", "♡"][i]}</div>
+              <div className="icon">
+                {i === 3 ? <Arrow /> : ["✦", "◌", "⌁", null, "ϟ", "♡"][i]}
+              </div>
               <span>0{i + 1}</span>
               <h3>{item}</h3>
               <p>
