@@ -39,10 +39,9 @@ function App() {
     const details = Object.fromEntries(new FormData(form).entries());
 
     try {
-      await axios.post(
-        import.meta.env.VITE_CONTACT_ENDPOINT || "/users/sendEmail",
-        details,
-      );
+      const apiBaseUrl =
+        import.meta.env.VITE_CONTACT_ENDPOINT?.replace(/\/$/, "") || "";
+      await axios.post(`${apiBaseUrl}/users/sendEmail`, details);
       form.reset();
       setFormStatus("success");
     } catch {
