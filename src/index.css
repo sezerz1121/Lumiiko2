@@ -993,6 +993,38 @@ footer div {
   display: flex;
   gap: 18px;
 }
+.legal-page {
+  min-height: 100vh;
+  padding-top: 32px;
+  padding-bottom: 72px;
+}
+.legal-page article {
+  max-width: 720px;
+  margin: 90px auto 0;
+}
+.legal-page h1 {
+  margin: 14px 0 8px;
+  font: 500 clamp(42px, 7vw, 74px) / 0.95 "DM Sans", sans-serif;
+  letter-spacing: -0.06em;
+  color: var(--ink);
+}
+.legal-page h2 {
+  margin: 32px 0 8px;
+  font: 500 20px / 1.15 "DM Sans", sans-serif;
+  color: var(--ink);
+}
+.legal-page p {
+  color: #76716b;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.legal-page .legal-updated {
+  margin: 0;
+  font: 500 11px "DM Mono", monospace;
+}
+.legal-page a:not(.logo) {
+  color: #8b4433;
+}
 @media (max-width: 760px) {
   .section {
     padding-left: 20px;

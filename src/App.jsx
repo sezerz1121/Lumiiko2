@@ -28,7 +28,53 @@ const Logo = () => (
   </svg>
 );
 
-function App() {
+const legalPages = {
+  "/privacy-policy": {
+    title: "Privacy Policy",
+    updated: "July 28, 2026",
+    sections: [
+      ["Information we collect", "When you contact us, we collect the information you provide, such as your name, email address, phone number, company details, and project message."],
+      ["How we use your information", "We use your information to respond to enquiries, prepare proposals, provide our services, and improve how we communicate with you. We do not sell your personal information."],
+      ["Sharing and security", "We share information only with service providers that help us operate our business or when required by law. We use reasonable measures to protect the information we hold, but no online transmission or storage method is completely secure."],
+      ["Your choices", "You may ask us to access, correct, or delete your personal information, or opt out of marketing messages, by emailing studio@lumiiko.in."],
+      ["Changes to this policy", "We may update this policy from time to time. The latest version will always be posted on this page."],
+    ],
+  },
+  "/terms-and-conditions": {
+    title: "Terms & Conditions",
+    updated: "July 28, 2026",
+    sections: [
+      ["Using this website", "You may use this website for lawful purposes and in accordance with these terms. You must not interfere with the website or attempt to access it in an unauthorized way."],
+      ["Our content", "The content, branding, designs, and other materials on this website belong to Lumiiko or its licensors. You may not reproduce, distribute, or use them without prior written permission."],
+      ["Services and proposals", "Any scope, timeline, pricing, and deliverables for our services are governed by the written proposal or agreement provided for your project. Website content is for general information and is not a binding offer."],
+      ["Third-party links", "This website may link to third-party websites. We are not responsible for their content, availability, or privacy practices."],
+      ["Limitation of liability", "To the extent permitted by law, Lumiiko is not liable for indirect, incidental, or consequential loss arising from use of this website."],
+      ["Changes to these terms", "We may update these terms from time to time. Your continued use of the website after an update means you accept the revised terms."],
+    ],
+  },
+};
+
+function LegalPage({ page }) {
+  return (
+    <main className="legal-page section">
+      <a className="logo" href="/" aria-label="Back to Lumiiko home"><Logo /></a>
+      <article>
+        <p className="eyebrow">Lumiiko</p>
+        <h1>{page.title}</h1>
+        <p className="legal-updated">Last updated: {page.updated}</p>
+        {page.sections.map(([heading, copy]) => (
+          <section key={heading}>
+            <h2>{heading}</h2>
+            <p>{copy}</p>
+          </section>
+        ))}
+        <p>Questions? Contact us at <a href="mailto:studio@lumiiko.in">studio@lumiiko.in</a>.</p>
+      </article>
+    </main>
+  );
+}
+
+function HomePage() {
   const root = useRef(null);
   const [formStatus, setFormStatus] = useState("idle");
 
@@ -545,14 +591,21 @@ function App() {
         <a className="logo" href="#top">
           <Logo />
         </a>
-        <p>© 2025 Lumiiko. U.S.-focused, globally available.</p>
+        <p>© {new Date().getFullYear()} Lumiiko. U.S.-focused, globally available.</p>
         <div>
+          <a href="/privacy-policy">Privacy Policy</a>
+          <a href="/terms-and-conditions">Terms &amp; Conditions</a>
           <a href="mailto:studio@lumiiko.in">studio@lumiiko.in</a>
           <a href="tel:+919265856366">+91 92658 56366</a>
         </div>
       </footer>
     </main>
   );
+}
+
+function App() {
+  const legalPage = legalPages[window.location.pathname];
+  return legalPage ? <LegalPage page={legalPage} /> : <HomePage />;
 }
 
 export default App;
